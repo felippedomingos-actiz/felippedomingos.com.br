@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IA em laboratório acreditado: o que pode e o que não pode | Felippe Domingos</title>
+<meta name="description" content="Guia gratuito para laboratórios de 3 a 8 analistas sob a ISO/IEC 17025: o que pode entrar numa ferramenta de IA, onde ela não entra e uma política de uma página pronta para assinar.">
+<meta property="og:title" content="IA em laboratório acreditado: o que pode e o que não pode">
+<meta property="og:description" content="Guia gratuito, 29 páginas, para quem responde por um laboratório sob a ISO/IEC 17025.">
+<meta property="og:image" content="https://felippedomingos.com.br/guia-ia/capa.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root { --tinta:#1B2A38; --petroleo:#0F4C5C; --claro:#DCEAEC; --ambar:#C8860A; --cinza:#5B6B78; --linha:#D5DDE3; --fundo:#FAFBFC; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Lato, system-ui, sans-serif; color:var(--tinta); background:#fff; line-height:1.6; }
+  .wrap { max-width: 1040px; margin:0 auto; padding: 0 20px; }
+  header.hero { background: var(--petroleo); color:#fff; padding: 56px 0 64px; }
+  .hero .grid { display:grid; grid-template-columns: 1.3fr .7fr; gap:48px; align-items:center; }
+  .selo { letter-spacing:.18em; text-transform:uppercase; font-size:.78rem; color:var(--claro); }
+  h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height:1.15; font-weight:900; margin:14px 0 18px; }
+  .sub { font-size:1.15rem; color:var(--claro); max-width: 36em; }
+  .faixa { height:5px; width:120px; background:var(--ambar); margin:22px 0; }
+  .capa { width:100%; max-width:300px; border-radius:6px; box-shadow: 0 18px 40px rgba(0,0,0,.35); justify-self:center; }
+  section { padding: 56px 0; }
+  .abertura p { font-size:1.1rem; max-width: 42em; }
+  .abertura strong { color: var(--petroleo); }
+  h2 { color:var(--petroleo); font-size:1.5rem; margin:0 0 24px; }
+  .cards { display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; }
+  .card { background:var(--fundo); border:1px solid var(--linha); border-top:4px solid var(--ambar); border-radius:8px; padding:20px 22px; }
+  .card h3 { margin:0 0 8px; font-size:1.05rem; color:var(--petroleo); }
+  .card p { margin:0; color:var(--cinza); font-size:.97rem; }
+  .meta { margin-top:22px; color:var(--cinza); font-size:.95rem; }
+  .form-sec { background: var(--claro); }
+  .form-box { background:#fff; border-radius:10px; padding:28px; max-width:560px; box-shadow: 0 6px 24px rgba(15,76,92,.12); }
+  label { display:block; font-weight:700; font-size:.92rem; margin: 14px 0 6px; }
+  input[type=text], input[type=email], select { width:100%; padding:11px 12px; border:1px solid var(--linha); border-radius:6px; font: inherit; }
+  .consent { display:flex; gap:10px; align-items:flex-start; margin-top:18px; font-size:.9rem; color:var(--cinza); }
+  .consent input { margin-top:4px; }
+  button { margin-top:20px; background:var(--ambar); color:#fff; border:0; border-radius:6px; padding:13px 22px; font: 700 1rem Lato, sans-serif; cursor:pointer; }
+  button:hover { filter: brightness(.95); }
+  .ok { display:none; margin-top:16px; padding:14px; background:#EAF4EE; border-left:4px solid #2E7D4F; border-radius:4px; }
+  .autor { display:grid; grid-template-columns: 1fr; max-width: 46em; }
+  footer { border-top:1px solid var(--linha); padding: 28px 0 40px; color:var(--cinza); font-size:.88rem; }
+  footer a { color: var(--petroleo); }
+  @media (max-width: 760px) {
+    .hero .grid { grid-template-columns: 1fr; gap:28px; }
+    .capa { max-width:220px; }
+    .cards { grid-template-columns: 1fr; }
+    section { padding: 40px 0; }
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap grid">
+    <div>
+      <div class="selo">Guia gratuito · ISO/IEC 17025</div>
+      <h1>IA em laboratório acreditado: o que pode e o que não pode</h1>
+      <div class="faixa"></div>
+      <p class="sub">Um guia para quem responde por um laboratório de 3 a 8 analistas sob a ISO/IEC 17025 e sabe que a equipe já usa IA, mas ainda não escreveu a regra.</p>
+      <p><a href="#receber" style="color:#fff;font-weight:700">Quero receber o guia ↓</a></p>
+    </div>
+    <img class="capa" src="capa.png" alt="Capa do guia IA em laboratório acreditado">
+  </div>
+</header>
+
+<section class="abertura">
+  <div class="wrap">
+    <p>Numa enquete que fiz com profissionais da qualidade, <strong>14 de 24</strong> disseram que, onde trabalham, cada um usa IA por conta própria, sem regra. Em laboratório acreditado isso pesa mais, porque confidencialidade, registros técnicos e controle de dados são requisitos auditados, e não boas práticas.</p>
+    <p>Escrevi este guia para que essa regra caiba em uma página e possa ser implantada em uma semana, sem esperar aprovação de orçamento para começar.</p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>O que você encontra</h2>
+    <div class="cards">
+      <div class="card"><h3>O semáforo dos dados</h3><p>O que pode entrar numa ferramenta de IA, o que só entra sem identificação e o que nunca entra.</p></div>
+      <div class="card"><h3>Onde a IA não entra</h3><p>Cálculo de resultado, decisão de conformidade e laudo, e um teste simples para os casos de fronteira.</p></div>
+      <div class="card"><h3>A política de uma página</h3><p>Um modelo pronto para preencher e assinar com a equipe, com checklist de anonimização e registro de uso.</p></div>
+    </div>
+    <p class="meta">29 páginas · PDF · gratuito · com glossário dos termos técnicos</p>
+  </div>
+</section>
+
+<section class="form-sec" id="receber">
+  <div class="wrap">
+    <div class="form-box">
+      <h2 style="margin-bottom:6px">Receba o guia por e-mail</h2>
+      <p style="margin:0;color:var(--cinza)">Você confirma o e-mail e o guia chega logo em seguida.</p>
+      <!-- MAILERLITE: substituir ACTION_MAILERLITE pela URL do formulário incorporado (Forms > Embedded > HTML). Os nomes dos campos seguem o padrão do MailerLite. -->
+      <form id="f" action="ACTION_MAILERLITE" method="post" target="_blank">
+        <label for="nome">Nome</label>
+        <input id="nome" name="fields[name]" type="text" autocomplete="given-name" required>
+        <label for="email">E-mail</label>
+        <input id="email" name="fields[email]" type="email" autocomplete="email" required>
+        <label for="analistas">Quantos analistas tem o seu laboratório?</label>
+        <select id="analistas" name="fields[analistas]" required>
+          <option value="">Selecione</option>
+          <option>1 a 2</option><option>3 a 8</option><option>9 ou mais</option><option>Não trabalho em laboratório</option>
+        </select>
+        <div class="consent">
+          <input id="lgpd" name="gdpr[]" type="checkbox" value="consentimento" required>
+          <label for="lgpd" style="font-weight:400;margin:0">Autorizo Felippe Domingos a usar meu nome e e-mail para enviar o guia e até três e-mails sobre o tema. Posso cancelar a qualquer momento pelo link em cada mensagem. Veja a <a href="/privacidade/">política de privacidade</a>.</label>
+        </div>
+        <input type="hidden" name="ml-submit" value="1">
+        <button type="submit">Quero receber o guia</button>
+        <div class="ok" id="ok">Pronto. Confirme seu e-mail na mensagem que acabou de chegar, e o guia vai logo em seguida.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Quem escreve</h2>
+    <p style="max-width:42em">Sou Felippe Domingos, engenheiro químico. Há mais de vinte anos acompanho implantações de sistemas em laboratórios de controle de qualidade, e aprendi que a tecnologia, sozinha, raramente determina o resultado. O que determina é a ordem: entender como o laboratório trabalha, padronizar, e só então escolher a ferramenta.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Felippe Domingos · <a href="/privacidade/">Política de privacidade</a> · contato@felippedomingos.com.br</div>
+</footer>
+</body>
+</html>

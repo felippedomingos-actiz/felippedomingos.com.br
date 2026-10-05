@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnóstico de Maturidade Digital do Laboratório | Felippe Domingos</title>
+<meta name="description" content="20 perguntas, cerca de 10 minutos. Descubra o nível de maturidade digital do seu laboratório, o gargalo que segura o conjunto e as três ações de maior retorno para os próximos 90 dias.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Diagnóstico de Maturidade Digital do Laboratório">
+<meta property="og:description" content="20 perguntas, resultado na hora, nada é enviado sem você pedir.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root { --tinta:#1B2A38; --petroleo:#0F4C5C; --claro:#DCEAEC; --ambar:#C8860A; --ambar-texto:#8A5A00; --ambar-fundo:#FBF3E4; --cinza:#5B6B78; --linha:#D5DDE3; --fundo:#FAFBFC; --erro:#A3341F; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin:0; font-family: Lato, system-ui, sans-serif; color:var(--tinta); background:#fff; line-height:1.6; overflow-x:hidden; }
+  .wrap { max-width: 820px; margin:0 auto; padding: 0 16px; }
+  a { color: var(--petroleo); }
+  :focus-visible { outline: 3px solid var(--ambar); outline-offset: 2px; }
+  .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+  header.hero { background: var(--petroleo); color:#fff; padding: 44px 0 52px; }
+  header.hero.compacto { padding: 18px 0; }
+  header.hero.compacto .hero-corpo { display:none; }
+  .selo { letter-spacing:.16em; text-transform:uppercase; font-size:.76rem; color:var(--claro); }
+  .teste { display:inline-block; margin-left:8px; padding:1px 8px; border:1px solid rgba(220,234,236,.55); border-radius:20px; letter-spacing:.06em; font-size:.7rem; }
+  h1 { font-size: clamp(1.75rem, 5.5vw, 2.6rem); line-height:1.15; font-weight:900; margin:14px 0 16px; }
+  .sub { font-size:1.1rem; color:var(--claro); max-width: 36em; margin:0; }
+  .faixa { height:5px; width:120px; background:var(--ambar); margin:20px 0; }
+
+  main section { padding: 36px 0 48px; }
+  h2 { color:var(--petroleo); font-size:1.45rem; line-height:1.25; margin:0 0 14px; }
+  h3 { color:var(--petroleo); font-size:1.1rem; margin:0 0 8px; }
+  p { margin: 0 0 14px; }
+  .muted { color:var(--cinza); }
+
+  .btn { display:inline-block; background:var(--ambar); color:#fff; border:0; border-radius:6px; padding:13px 24px; font: 700 1.2rem Lato, sans-serif; cursor:pointer; text-decoration:none; min-height:48px; }
+  .btn:hover { filter: brightness(.94); }
+  .btn[disabled] { background:#C9D1D7; color:#4A5864; cursor:not-allowed; filter:none; }
+  .btn-sec { background:#fff; color:var(--petroleo); border:2px solid var(--petroleo); font-size:1.05rem; padding:11px 20px; }
+  .btn-sec:hover { background:var(--claro); filter:none; }
+  .acoes-nav { display:flex; gap:12px; justify-content:space-between; flex-wrap:wrap; margin-top:28px; }
+
+  .intro p { font-size:1.08rem; max-width: 40em; }
+  .intro .cards { margin: 22px 0 26px; }
+
+  .cards { display:grid; grid-template-columns: 1fr; gap:16px; }
+  .card { background:var(--fundo); border:1px solid var(--linha); border-top:4px solid var(--ambar); border-radius:8px; padding:18px 20px; }
+  .card p { margin:0; color:var(--cinza); font-size:.97rem; }
+
+  /* progresso */
+  .progresso { margin-bottom: 22px; }
+  .progresso-topo { display:flex; justify-content:space-between; font-size:.9rem; color:var(--cinza); margin-bottom:6px; gap:12px; }
+  .barra { height:8px; background:var(--claro); border-radius:8px; overflow:hidden; }
+  .barra > span { display:block; height:100%; background:var(--petroleo); width:0; transition: width .25s; }
+  .dim-desc { color:var(--cinza); margin-bottom: 18px; }
+
+  fieldset.pergunta { border:1px solid var(--linha); border-radius:8px; padding:16px 16px 10px; margin:0 0 18px; background:#fff; min-width:0; }
+  fieldset.pergunta legend { font-weight:700; padding:0 6px; margin-left:-6px; font-size:1.02rem; line-height:1.4; max-width:100%; }
+  fieldset.pergunta legend .num { color:var(--ambar-texto); margin-right:4px; }
+  .alt { display:flex; gap:10px; align-items:flex-start; padding:10px 12px; margin:6px 0; border:1px solid var(--linha); border-radius:6px; cursor:pointer; background:var(--fundo); font-size:.98rem; line-height:1.4; }
+  .alt:hover { border-color: var(--petroleo); }
+  .alt input { margin:3px 0 0; width:18px; height:18px; flex:0 0 auto; accent-color: var(--petroleo); }
+  .alt:has(input:checked) { border-color:var(--petroleo); background:var(--claro); }
+  .alt:has(input:focus-visible) { outline:3px solid var(--ambar); outline-offset:1px; }
+  .falta { font-size:.9rem; color:var(--cinza); margin-top:10px; }
+
+  /* resultado */
+  .bloco { border:1px solid var(--linha); border-radius:10px; padding:20px; margin-bottom:18px; background:#fff; }
+  .bloco .rotulo { font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--cinza); margin-bottom:4px; }
+  .destaque { background:var(--petroleo); color:#fff; border-color:var(--petroleo); }
+  .destaque h2, .destaque .rotulo { color:var(--claro); }
+  .destaque .nivel-grande { font-size: clamp(2rem, 8vw, 2.8rem); font-weight:900; line-height:1.1; margin:4px 0 6px; color:#fff; }
+  .destaque blockquote { margin:10px 0 0; padding-left:14px; border-left:4px solid var(--ambar); font-style:italic; color:var(--claro); }
+  .nivel-medio { font-size:1.6rem; font-weight:900; color:var(--petroleo); margin:2px 0 8px; }
+
+  .perfil { list-style:none; margin:10px 0 0; padding:0; }
+  .perfil li { display:grid; grid-template-columns: 1fr; gap:4px; margin-bottom:14px; }
+  .perfil .nome { font-size:.95rem; display:flex; justify-content:space-between; gap:8px; }
+  .perfil .nome b { white-space:nowrap; }
+  .trilho { position:relative; height:16px; background:var(--claro); border-radius:4px; overflow:hidden; }
+  .trilho .valor { position:absolute; inset:0 auto 0 0; background:var(--petroleo); border-radius:4px 0 0 4px; }
+  .trilho .marcas { position:absolute; inset:0; display:grid; grid-template-columns: repeat(5, 1fr); pointer-events:none; }
+  .trilho .marcas i { border-right:2px solid #fff; }
+  .perfil li.gargalo .valor { background:var(--ambar); }
+  .perfil li.gargalo .nome { color:var(--ambar-texto); font-weight:700; }
+  .escala { display:grid; grid-template-columns: repeat(5, 1fr); font-size:.75rem; color:var(--cinza); text-align:right; margin-top:-4px; }
+
+  .gargalo-bloco { border-left:6px solid var(--ambar); }
+  ol.acoes { list-style:none; counter-reset: a; margin:12px 0 0; padding:0; display:grid; gap:12px; }
+  ol.acoes li { counter-increment: a; background:var(--fundo); border:1px solid var(--linha); border-top:4px solid var(--ambar); border-radius:8px; padding:14px 16px; }
+  ol.acoes li::before { content: "Ação " counter(a); display:block; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ambar-texto); font-weight:700; margin-bottom:4px; }
+
+  .alerta { background:var(--ambar-fundo); border:1px solid #E7C98F; border-left:6px solid var(--ambar); }
+  .alerta h2 { color:var(--ambar-texto); }
+
+  .form-sec { background: var(--claro); }
+  .form-box { background:#fff; border-radius:10px; padding:22px; max-width:560px; box-shadow: 0 6px 24px rgba(15,76,92,.12); }
+  label.campo { display:block; font-weight:700; font-size:.92rem; margin: 14px 0 6px; }
+  input[type=text], input[type=email], select { width:100%; padding:11px 12px; border:1px solid #9AA8B3; border-radius:6px; font: inherit; color:var(--tinta); background:#fff; min-height:46px; }
+  .consent { display:flex; gap:10px; align-items:flex-start; margin-top:18px; font-size:.9rem; color:var(--tinta); }
+  .consent input { margin-top:4px; width:18px; height:18px; flex:0 0 auto; accent-color: var(--petroleo); }
+  .aviso { display:none; margin-top:16px; padding:14px; border-radius:4px; }
+  .aviso.info { display:block; background:var(--ambar-fundo); border-left:4px solid var(--ambar); }
+  .aviso.ok { display:block; background:#EAF4EE; border-left:4px solid #2E7D4F; }
+  .aviso.erro { display:block; background:#FBECE8; border-left:4px solid var(--erro); }
+
+  footer { border-top:1px solid var(--linha); padding: 24px 0 36px; color:var(--cinza); font-size:.88rem; }
+  footer a { color: var(--petroleo); }
+
+  [hidden] { display:none !important; }
+
+  @media (min-width: 700px) {
+    .wrap { padding: 0 24px; }
+    main section { padding: 48px 0 60px; }
+    .intro .cards { grid-template-columns: repeat(3, 1fr); }
+    .bloco { padding: 24px 28px; }
+    .perfil li { grid-template-columns: 240px 1fr; align-items:center; gap:16px; }
+    .escala { margin-left: 256px; }
+    fieldset.pergunta { padding:20px 22px 14px; }
+    .form-box { padding:28px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .barra > span { transition:none; } }
+</style>
+</head>
+<body>
+<header class="hero" id="topo">
+  <div class="wrap">
+    <div class="selo">Felippe Domingos · Diagnóstico gratuito <span class="teste">Versão de teste</span></div>
+    <div class="hero-corpo">
+      <h1>Diagnóstico de Maturidade Digital do Laboratório</h1>
+      <div class="faixa"></div>
+      <p class="sub">São 20 perguntas, cerca de 10 minutos, e o resultado aparece na hora. Nada é enviado a lugar nenhum se você não pedir.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- TELA 1: início -->
+  <section id="tela-inicio" class="intro" aria-labelledby="t-inicio">
+    <div class="wrap">
+      <h2 id="t-inicio">Antes de começar</h2>
+      <p>Há mais de vinte anos acompanho implantações de sistemas em laboratórios de controle de qualidade, e a pergunta que mais ouço é por onde começar. Montei este diagnóstico para responder a ela com método: ele mede o que o seu laboratório é capaz de fazer hoje, e não o que ele comprou.</p>
+      <p>As perguntas estão divididas em cinco dimensões, e cada uma recebe um nível de 1 a 5. Um laboratório raramente tem um nível só; ele tem um perfil, e é justamente esse perfil que mostra onde está o gargalo que segura o conjunto.</p>
+      <div class="cards">
+        <div class="card"><h3>Seu nível e seu potencial</h3><p>Onde o laboratório está hoje e onde estaria se o gargalo fosse corrigido.</p></div>
+        <div class="card"><h3>O gargalo</h3><p>A dimensão que limita as demais, por que ela trava e o que a destrava.</p></div>
+        <div class="card"><h3>Três ações para 90 dias</h3><p>Passos concretos, escolhidos pelo seu gargalo e pelo seu nível.</p></div>
+      </div>
+      <p class="muted">Responda pensando em como o laboratório funciona de fato, e não em como deveria funcionar. O cálculo é feito no seu navegador.</p>
+      <button type="button" class="btn" id="btn-comecar">Começar</button>
+      <p class="muted" id="retomar" hidden style="margin-top:14px">Encontrei respostas suas guardadas neste navegador. <button type="button" class="btn-link" id="btn-retomar" style="background:none;border:0;padding:0;color:var(--petroleo);font:inherit;text-decoration:underline;cursor:pointer">Continuar de onde parei</button></p>
+    </div>
+  </section>
+
+  <!-- TELA 2: perguntas -->
+  <section id="tela-perguntas" hidden aria-labelledby="t-dim">
+    <div class="wrap">
+      <div class="progresso">
+        <div class="progresso-topo"><span id="prog-etapa">Etapa 1 de 5</span><span id="prog-resp">0 de 20 respondidas</span></div>
+        <div class="barra" role="progressbar" aria-label="Progresso do diagnóstico" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" id="prog-barra"><span></span></div>
+      </div>
+      <h2 id="t-dim" tabindex="-1"></h2>
+      <p class="dim-desc" id="dim-desc"></p>
+      <form id="form-etapa" novalidate>
+        <div id="perguntas"></div>
+        <p class="falta" id="falta" aria-live="polite"></p>
+        <div class="acoes-nav">
+          <button type="button" class="btn btn-sec" id="btn-voltar">Voltar</button>
+          <button type="submit" class="btn" id="btn-avancar" disabled>Avançar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- TELA 3: resultado -->
+  <section id="tela-resultado" hidden aria-labelledby="t-resultado">
+    <div class="wrap">
+      <h2 id="t-resultado" tabindex="-1" class="sr">Resultado do diagnóstico</h2>
+      <div id="resultado"></div>
+      <div class="acoes-nav" style="justify-content:flex-start">
+        <button type="button" class="btn" id="btn-email">Receber o resultado por e-mail</button>
+        <button type="button" class="btn btn-sec" id="btn-refazer">Refazer</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TELA 4: e-mail -->
+  <section id="tela-email" class="form-sec" hidden aria-labelledby="t-email">
+    <div class="wrap">
+      <div class="form-box">
+        <h2 id="t-email" tabindex="-1" style="margin-bottom:6px">Receba o resultado por e-mail</h2>
+        <p class="muted" style="margin:0">Envio o seu resultado completo, com o perfil e as ações, para você guardar e compartilhar com a equipe.</p>
+        <!-- MAILERLITE: substituir ACTION_MAILERLITE_DIAGNOSTICO pela URL do formulário incorporado (Forms > Embedded > HTML).
+             Os campos personalizados (analistas, d1..d5, nivel, potencial, gargalo, alerta_ia, respostas) precisam existir no MailerLite com esses mesmos nomes.
+             Enquanto o action for o placeholder, o JS mostra um aviso de versão de teste e não envia nada. -->
+        <form id="form-email" action="ACTION_MAILERLITE_DIAGNOSTICO" method="post" target="_blank">
+          <label class="campo" for="nome">Nome</label>
+          <input id="nome" name="fields[name]" type="text" autocomplete="given-name" required>
+          <label class="campo" for="email">E-mail</label>
+          <input id="email" name="fields[email]" type="email" autocomplete="email" required>
+          <label class="campo" for="analistas">Quantos analistas tem o seu laboratório?</label>
+          <select id="analistas" name="fields[analistas]" required>
+            <option value="">Selecione</option>
+            <option>1 a 2</option><option>3 a 8</option><option>9 ou mais</option><option>Não trabalho em laboratório</option>
+          </select>
+          <div class="consent">
+            <input id="lgpd" name="gdpr[]" type="checkbox" value="consentimento" required>
+            <label for="lgpd">Autorizo Felippe Domingos a guardar meu nome, e-mail e minhas respostas para enviar o resultado e compor estatísticas agregadas e anônimas. Posso pedir a exclusão a qualquer momento. Veja a <a href="/privacidade/">política de privacidade</a>.</label>
+          </div>
+          <input type="hidden" name="fields[d1]" id="h-d1">
+          <input type="hidden" name="fields[d2]" id="h-d2">
+          <input type="hidden" name="fields[d3]" id="h-d3">
+          <input type="hidden" name="fields[d4]" id="h-d4">
+          <input type="hidden" name="fields[d5]" id="h-d5">
+          <input type="hidden" name="fields[nivel]" id="h-nivel">
+          <input type="hidden" name="fields[potencial]" id="h-potencial">
+          <input type="hidden" name="fields[gargalo]" id="h-gargalo">
+          <input type="hidden" name="fields[alerta_ia]" id="h-alerta">
+          <input type="hidden" name="fields[respostas]" id="h-respostas">
+          <input type="hidden" name="ml-submit" value="1">
+          <div class="acoes-nav" style="justify-content:flex-start;margin-top:20px">
+            <button type="submit" class="btn">Enviar</button>
+            <button type="button" class="btn btn-sec" id="btn-voltar-resultado">Voltar ao resultado</button>
+          </div>
+          <div class="aviso" id="aviso-email" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Felippe Domingos · <a href="/privacidade/">Política de privacidade</a> · <a href="mailto:contato@felippedomingos.com.br">contato@felippedomingos.com.br</a></div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Conteúdo: MODELO-MATURIDADE.md, seções 1, 2 e 4 ---------- */
+  var DIM = [
+    { id: "D1", nome: "Registro e Rastreabilidade",
+      desc: "Onde o dado nasce, como ele é guardado e se dá para reconstruir a história de uma amostra.",
+      trava: "Registro é a base de tudo o que vem depois. Quando o dado nasce em lugares diferentes, é digitado mais de uma vez ou não permite reconstruir a história de uma amostra, o laudo, o indicador e a auditoria herdam essa fragilidade, por melhor que o resto esteja organizado." },
+    { id: "D2", nome: "Documentação e Conformidade",
+      desc: "POP, registros, não conformidade, treinamento e prontidão para auditoria.",
+      trava: "Documentação e conformidade são o que a auditoria olha primeiro e o que sustenta o método quando alguém sai de férias ou deixa a equipe. Enquanto procedimento, registro e evidência não acompanham a prática, o laboratório depende de pessoas, e não de método." },
+    { id: "D3", nome: "Fluxo Operacional",
+      desc: "Do pedido do cliente à entrega do laudo: quanto é manual e quanto custa em tempo técnico.",
+      trava: "Quando o caminho do pedido ao laudo é manual, o tempo do analista, que é o recurso mais caro do laboratório, vai para digitação, e-mail e conferência. Sobra pouco tempo técnico para melhorar qualquer outra dimensão." },
+    { id: "D4", nome: "Gestão por Dados",
+      desc: "Se as decisões vêm de indicador ou de percepção.",
+      trava: "Sem indicador, as decisões vêm de percepção. O laboratório pode até funcionar bem, mas não consegue responder rápido quantas amostras, em quanto tempo e a que custo, e só enxerga o desvio depois que ele virou problema." },
+    { id: "D5", nome: "Assistência Inteligente e Governança",
+      desc: "Se há IA na operação, e se há controle sobre ela.",
+      trava: "A IA já está na rotina de muitas equipes, com ou sem autorização. Sem regra, ela não é avanço, é exposição: dado confidencial em ferramenta externa e texto que chega ao cliente sem uma revisão definida. E sem assistência governada, o trabalho não-técnico continua inteiro nas costas do analista." }
+  ];
+
+  var DESTRAVA = {
+    D1: { 1: "Parar de criar registro novo em papel: toda entrada de amostra e de resultado passa a nascer em meio digital, num formato único.",
+          2: "Uma identificação única de amostra e um único lugar onde cada dado é digitado, para que a história de um resultado possa ser reconstruída.",
+          3: "Ligar o resultado ao equipamento, à calibração vigente e ao analista no próprio registro, sem depender de buscar em pastas.",
+          4: "Usar os registros já organizados para enxergar tendências: tempo de liberação, repetição de ensaio, retrabalho." },
+    D2: { 1: "Reunir os procedimentos num único lugar, com a versão vigente identificada.",
+          2: "Lista mestra, controle de revisão e um modelo único de documento, para que o que está documentado passe a ser padronizado.",
+          3: "Usar apoio de IA para redigir e revisar documentos e tratar não conformidades, com política escrita e revisão humana.",
+          4: "Acompanhar indicadores de documentação e de não conformidade, como prazo de tratamento e recorrência, na análise crítica." },
+    D3: { 1: "Desenhar como o fluxo do pedido ao laudo acontece hoje, mesmo à mão, e escolher o trecho que mais gera retrabalho.",
+          2: "Padronizar esse trecho com quem executa e eliminar as transcrições duplicadas.",
+          3: "Assistir as etapas de texto e de conferência do fluxo, como resposta a cliente e conferência de laudo, com regra e revisão.",
+          4: "Medir o fluxo de ponta a ponta e usar esse dado para decidir onde investir." },
+    D4: { 1: "Escolher dois ou três números que o laboratório já tem e anotá-los todo mês.",
+          2: "Definir cada indicador por escrito, o que conta e de onde vem, para que todos meçam do mesmo jeito.",
+          3: "Transformar os indicadores definidos num painel simples, atualizado sem trabalho manual.",
+          4: "Levar os indicadores para a decisão: análise crítica, priorização de melhorias e conversa com o cliente." },
+    D5: { 1: "Descobrir como a equipe usa IA hoje, sem tom de cobrança, e escrever a primeira regra do que pode e do que não pode entrar.",
+          2: "Transformar a orientação informal numa política de uma página assinada pela equipe, com revisão humana para tudo o que vai ao cliente.",
+          3: "Aplicar IA a tarefas definidas, com revisão por criticidade, e medir o tempo economizado.",
+          4: "Ter duas ou mais pessoas capazes de criar e ajustar fluxos assistidos, com registro de uso por criticidade." }
+  };
+  var NIVEIS = {
+    1: { nome: "Analógico", frase: "A informação está na cabeça das pessoas e no papel.",
+         destrava: "Parar de criar registro novo em papel. Não é digitalizar o passado, é interromper a entrada analógica." },
+    2: { nome: "Digitalizado (sem padrão)", frase: "Está tudo no computador, mas cada um faz do seu jeito.",
+         destrava: "Uma convenção única (nomenclatura, estrutura, template) e o princípio de entrada única: o dado é digitado uma vez e reaproveitado." },
+    3: { nome: "Padronizado", frase: "Qualquer pessoa da equipe encontra qualquer informação, do mesmo jeito.",
+         destrava: "Assumir que o trabalho de texto, conferência e documentação pode ser assistido, e escrever a política que torna isso seguro." },
+    4: { nome: "Assistido por IA", frase: "O trabalho não-técnico saiu das costas do analista, com regra e com registro.",
+         destrava: "Usar o tempo liberado para olhar o próprio dado." },
+    5: { nome: "Orientado a Dados", frase: "As decisões do laboratório vêm de indicador, não de percepção.",
+         destrava: "O N5 é o teto economicamente racional para um laboratório de 3 a 8 analistas. Daqui em diante, o trabalho é sustentar o que foi construído." }
+  };
+
+  var PERGUNTAS = [
+    // D1
+    [
+      { id: "1.1", t: "Onde nasce o registro do resultado do ensaio?", a: [
+        "Caderno de bancada ou ficha de papel",
+        "Planilha Excel individual de cada analista",
+        "Planilha ou sistema compartilhado, em formato padronizado",
+        "Estrutura padronizada com validação automática de entrada",
+        "Entrada automatizada (equipamento ou importação) com trilha de auditoria"] },
+      { id: "1.2", t: "Para reconstruir o histórico completo de uma amostra entregue há 12 meses (quem fez, quando, com qual equipamento, qual resultado bruto), quanto tempo leva?", a: [
+        "Não é possível, ou levaria mais de um dia",
+        "Algumas horas, procurando em vários lugares",
+        "Menos de 30 minutos; sei onde procurar",
+        "Minutos, tudo em um único lugar",
+        "Imediato, com registro de quem alterou o quê"] },
+      { id: "1.3", t: "Quantas vezes o mesmo dado é digitado, da entrada da amostra até o laudo?", a: [
+        "Quatro vezes ou mais",
+        "Três vezes",
+        "Duas vezes",
+        "Uma vez, e é reaproveitado daí em diante",
+        "Nenhuma; a captura é direta"] },
+      { id: "1.4", t: "Se o computador principal do laboratório queimasse hoje, o que se perderia?", a: [
+        "Não sei, ou muita coisa",
+        "Alguma coisa; há cópia, mas desatualizada",
+        "Nada crítico; há backup regular, nunca testado",
+        "Nada; backup automático e restauração já testada",
+        "Nada; redundância documentada e testada periodicamente"] }
+    ],
+    // D2
+    [
+      { id: "2.1", t: "Qual é a situação dos POPs e instruções de trabalho?", a: [
+        "Não existem formalmente, ou estão desatualizados",
+        "Existem em Word/PDF, com versão vigente nem sempre clara",
+        "Padronizados, com controle de versão e revisão periódica",
+        "Padronizados, produzidos e revisados com assistência digital e validação humana",
+        "Vivos: revisados por gatilho (mudança de método, NC, auditoria), com métrica de adesão"] },
+      { id: "2.2", t: "Quanto esforço o laboratório gasta para preparar uma auditoria?", a: [
+        "Semanas de correria; sempre falta evidência",
+        "Duas semanas ou mais de esforço concentrado",
+        "Alguns dias; a documentação existe, falta organizar",
+        "Um dia ou menos; evidências geradas com apoio de ferramentas",
+        "Nenhum esforço extra; a evidência é subproduto da operação"] },
+      { id: "2.3", t: "Como o laboratório trata não conformidade e desvio?", a: [
+        "Informalmente; resolve-se no dia a dia",
+        "Registro em planilha, sem análise de causa consistente",
+        "Registro estruturado, com causa raiz e ação acompanhada",
+        "Registro estruturado, com apoio de ferramenta na análise e na redação",
+        "Detecção antecipada por tendência, antes de virar não conformidade"] },
+      { id: "2.4", t: "Como está o registro de treinamento e qualificação de pessoal?", a: [
+        "Não existe, ou está incompleto",
+        "Existe em papel ou planilha, atualizado quando alguém lembra",
+        "Estruturado, com matriz de competência atualizada",
+        "Estruturado, com material e avaliação apoiados por ferramentas",
+        "Vinculado à liberação de tarefa por competência comprovada"] }
+    ],
+    // D3
+    [
+      { id: "3.1", t: "Como o cliente solicita e acompanha uma análise?", a: [
+        "Telefone ou WhatsApp, sem registro estruturado",
+        "E-mail, controlado em planilha",
+        "Formulário ou canal padronizado, com registro",
+        "Canal padronizado, com triagem e resposta assistida",
+        "Portal ou autoatendimento com status em tempo real"] },
+      { id: "3.2", t: "Como o laudo é emitido?", a: [
+        "Digitado do zero em Word a cada emissão",
+        "Template preenchido manualmente",
+        "Gerado a partir dos dados já registrados, com revisão",
+        "Gerado, com conferência assistida de inconsistências",
+        "Gerado e validado por regra; revisão humana por exceção"] },
+      { id: "3.3", t: "Quanto do tempo do analista técnico é consumido por trabalho não-técnico (digitação, e-mail, planilha, documento, relatório)?", a: [
+        "Mais de 50%, ou não sei medir",
+        "Entre 35% e 50%",
+        "Entre 20% e 35%, e sei porque medi",
+        "Menos de 20%, com apoio de ferramentas",
+        "Menos de 10%; o trabalho não-técnico é majoritariamente automatizado"] },
+      { id: "3.4", t: "Quanto tempo leva uma cotação para um cliente novo?", a: [
+        "Dias, e depende de uma pessoa específica",
+        "Um dia, feita manualmente do zero",
+        "Horas; existe tabela e template padronizados",
+        "Minutos, com apoio de ferramenta e revisão humana",
+        "Imediato, com regra de precificação baseada em custo real"] }
+    ],
+    // D4
+    [
+      { id: "4.1", t: "Você sabe, agora, quantas amostras estão em andamento e quantas estão atrasadas?", a: [
+        "Não; precisaria perguntar à equipe",
+        "Aproximadamente; alguém mantém uma planilha",
+        "Sim, número exato, atualizado diariamente",
+        "Sim, atualizado automaticamente",
+        "Sim, e sou alertado antes do atraso acontecer"] },
+      { id: "4.2", t: "Quais indicadores são acompanhados com regularidade (TAT, retrabalho, NC, ocupação, custo por ensaio)?", a: [
+        "Nenhum formalmente",
+        "Um ou dois, montados manualmente quando necessário",
+        "Três ou mais, com rotina definida de acompanhamento",
+        "Três ou mais, gerados automaticamente e revisados em reunião",
+        "Painel completo, com meta, tendência e alerta de desvio"] },
+      { id: "4.3", t: "Você conhece o custo real (hora-analista, reagente, equipamento) de cada tipo de ensaio?", a: [
+        "Não; o preço vem do mercado ou do histórico",
+        "Estimativa grosseira",
+        "Sim, calculado e revisado periodicamente",
+        "Sim, e usado na precificação e na decisão de aceitar demanda",
+        "Sim, atualizado automaticamente e usado em simulação de cenário"] },
+      { id: "4.4", t: "Ao decidir contratar, comprar equipamento ou aceitar um contrato grande, você decide com base em:", a: [
+        "Percepção e experiência",
+        "Percepção somada a alguma planilha",
+        "Dados históricos organizados",
+        "Dados históricos e análise de capacidade",
+        "Modelo de previsão de demanda e capacidade"] }
+    ],
+    // D5
+    [
+      { id: "5.1", t: "Sua equipe usa IA (ChatGPT, Copilot, Gemini) no trabalho?", a: [
+        "Não, ou não sei",
+        "Sim, informalmente, por conta própria, sem qualquer controle",
+        "Sim, com orientação informal sobre o que pode ser usado",
+        "Sim, em tarefas definidas, com política escrita e validação humana",
+        "Sim, integrada ao processo, com registro de uso e revisão por criticidade"] },
+      { id: "5.2", t: "Existe política escrita sobre que dados podem entrar em uma ferramenta de IA?", a: [
+        "Não existe, e o assunto nunca foi discutido",
+        "Não existe, mas o assunto já preocupou alguém",
+        "Existe orientação verbal ou informal",
+        "Existe política escrita, comunicada e assinada pela equipe",
+        "Política escrita, auditada, com registro de uso e revisão periódica"] },
+      { id: "5.3", t: "Quando uma ferramenta de IA participa de algo que vai para o cliente, o que garante a correção?", a: [
+        "Nada definido, ou não se aplica",
+        "A pessoa confere, se lembrar",
+        "Regra informal: alguém sempre revisa",
+        "Revisão obrigatória, definida pela criticidade da tarefa",
+        "Revisão por criticidade, com registro de quem validou"] },
+      { id: "5.4", t: "Quantas pessoas do laboratório conseguem criar ou ajustar um fluxo assistido sozinhas?", a: [
+        "Nenhuma",
+        "Uma, de forma informal",
+        "Uma, com conhecimento consolidado",
+        "Duas ou mais, treinadas",
+        "A maior parte da equipe, seguindo um padrão comum"] }
+    ]
+  ];
+
+  /* ---------- Ações de 90 dias: ACOES[dimensão][nível do gargalo] ----------
+     Níveis 1 a 4 miram os sinais do nível seguinte (MODELO-MATURIDADE.md, seção 2 e alternativas da seção 4).
+     Nível 5: ações de manutenção. Neutras em ferramenta. */
+  var ACOES = {
+    D1: {
+      1: ["Escolha o ensaio de maior volume e passe a registrar o resultado direto em uma planilha compartilhada, sem caderno ou ficha intermediária.",
+          "Defina uma pasta única do laboratório para todo registro novo e combine com a equipe que, a partir de agora, nenhum registro nasce em papel.",
+          "Configure uma cópia automática dessa pasta para um segundo local e defina quem confere, uma vez por mês, se a cópia está sendo feita."],
+      2: ["Escreva em uma página uma convenção única de nomes de arquivo e de estrutura de pastas, e aplique a tudo o que for criado daqui em diante.",
+          "Mapeie quantas vezes o dado da amostra é digitado da entrada ao laudo e elimine a primeira redigitação, fazendo a etapa seguinte reaproveitar o dado já registrado.",
+          "Teste a restauração do backup: recupere um arquivo de três meses atrás e registre quanto tempo levou e o que faltou."],
+      3: ["Inclua validação de entrada nos registros de resultado (faixas, unidades, campos obrigatórios) para que o erro de digitação seja barrado na origem.",
+          "Escolha cinco amostras antigas e reconstrua o histórico completo de cada uma, cronometrando; cada lacuna encontrada vira um campo novo no registro.",
+          "Transforme o teste de restauração do backup em rotina trimestral, com responsável e registro do resultado."],
+      4: ["Levante quais equipamentos já exportam resultado em arquivo e teste a importação direta de um deles, eliminando a digitação daquele ensaio.",
+          "Garanta que toda alteração de resultado fique registrada com quem alterou, quando e por quê, começando pelos ensaios que vão para laudo.",
+          "Documente a redundância do armazenamento e programe um teste periódico de recuperação completa, e não apenas de arquivos isolados."],
+      5: ["Uma vez por semestre, sorteie amostras e confira se a história completa de cada uma se reconstrói em minutos, com a trilha de alterações íntegra.",
+          "Ao incluir um equipamento ou ensaio novo, trate a captura direta e a validação de entrada como parte da implantação desde o primeiro dia.",
+          "Mantenha o teste de recuperação no calendário e registre o resultado, mesmo quando tudo der certo."]
+    },
+    D2: {
+      1: ["Liste os POPs e instruções em uso, com a data da última revisão, e identifique os ensaios que hoje rodam sem procedimento escrito.",
+          "Escreva o procedimento do ensaio mais crítico dessa lista a partir da prática real de quem executa, e valide o texto com a equipe.",
+          "Abra um registro simples de não conformidades e anote toda ocorrência a partir de hoje, inclusive as que se resolvem na hora."],
+      2: ["Monte uma lista mestra de documentos com código, versão vigente, data da próxima revisão e responsável, e retire de circulação as cópias obsoletas.",
+          "Passe a registrar causa raiz, ação, prazo e responsável em toda não conformidade, e revise as abertas em uma data fixa por mês.",
+          "Monte a matriz de competência da equipe, indicando quem está qualificado para cada ensaio e onde está a evidência do treinamento."],
+      3: ["Use assistência de IA para revisar a redação de um POP vigente, sem dado confidencial, compare o tempo com a revisão manual e mantenha a validação com quem conhece o método.",
+          "Monte um índice que aponte, para cada requisito da norma, onde está a evidência correspondente, para que a preparação de auditoria caia para um dia.",
+          "Use assistência na redação da análise de causa e no material de treinamento, deixando a conclusão técnica com quem conhece o processo."],
+      4: ["Defina os gatilhos que obrigam a revisão de um documento (mudança de método, não conformidade, constatação de auditoria) e registre cada revisão disparada.",
+          "Acompanhe a tendência das não conformidades por tipo e por ensaio, para agir antes que o desvio se repita.",
+          "Vincule a liberação de cada ensaio à competência comprovada na matriz, de modo que ninguém execute sem qualificação registrada."],
+      5: ["Revise uma vez por ano os gatilhos de revisão documental e a métrica de adesão, descartando o que não gera ação.",
+          "Use a auditoria interna para confirmar que a evidência continua saindo da própria operação, sem preparação especial.",
+          "Mantenha a matriz de competência ligada à liberação de tarefa sempre que a equipe ou o escopo mudarem."]
+    },
+    D3: {
+      1: ["Defina um único canal de entrada de pedidos e registre cada solicitação com data, cliente, ensaio e prazo combinado.",
+          "Transforme o laudo mais emitido em um template fixo, para que ele deixe de ser digitado do zero.",
+          "Monte uma tabela de preços por ensaio, para que a cotação não dependa de uma pessoa específica."],
+      2: ["Padronize o formulário de solicitação com os campos de que o laboratório realmente precisa e deixe de aceitar pedido fora dele.",
+          "Faça o laudo ser gerado a partir dos dados já registrados, de modo que nenhum resultado seja digitado de novo na emissão.",
+          "Durante duas semanas, peça à equipe que anote o tempo gasto em trabalho não-técnico; esse número passa a ser a sua linha de base."],
+      3: ["Escolha a tarefa não-técnica que mais consome tempo na sua medição e teste assistência de IA nela, com revisão humana e com o ganho medido.",
+          "Crie uma lista de conferência do laudo e use assistência para apontar inconsistências antes da assinatura, que continua humana.",
+          "Prepare respostas-modelo para as perguntas frequentes de clientes e para a cotação padrão, sempre revisadas antes do envio."],
+      4: ["Escreva as regras que um laudo precisa cumprir para ser liberado e concentre a revisão humana nas exceções.",
+          "Ofereça ao cliente uma forma de acompanhar o status da análise sem precisar ligar ou escrever.",
+          "Ligue a cotação ao custo real de cada ensaio, para que o preço saia de uma regra e não da memória de alguém."],
+      5: ["Meça de novo, a cada semestre, o tempo não-técnico da equipe, para garantir que ele não voltou a crescer.",
+          "Revise as regras de liberação de laudo sempre que entrar um ensaio novo ou mudar um método.",
+          "Acompanhe as exceções que caem na revisão humana; quando uma se repete, ela pede uma regra nova."]
+    },
+    D4: {
+      1: ["Toda segunda-feira, conte quantas amostras entraram, quantas saíram e quantas estão atrasadas, e guarde esses números em um só lugar.",
+          "Escolha um único indicador, o prazo de entrega (TAT), e calcule-o para o último mês.",
+          "Antes da próxima decisão relevante, anote a premissa que está usando, para conferir depois com o que de fato aconteceu."],
+      2: ["Defina três indicadores, como TAT, retrabalho e não conformidade, e uma reunião mensal fixa para olhar para eles.",
+          "Calcule o custo real dos três ensaios de maior volume, somando hora-analista, reagente e uso de equipamento.",
+          "Mantenha a contagem de amostras em andamento e atrasadas atualizada todos os dias, com um responsável definido."],
+      3: ["Faça os indicadores saírem automaticamente dos registros que já existem, para que ninguém precise montá-los à mão antes da reunião.",
+          "Compare o custo real com o preço praticado em cada ensaio e revise os que estão sendo vendidos abaixo do custo.",
+          "Calcule a capacidade da equipe em amostras por semana e use esse número antes de aceitar a próxima demanda grande."],
+      4: ["Defina meta e limite de alerta para cada indicador, para ser avisado antes do atraso, e não depois.",
+          "Monte uma simulação simples de cenário: o que acontece com prazo e custo se a demanda crescer 20%.",
+          "Use o histórico de demanda para projetar os próximos seis meses e apoiar a decisão de contratar ou comprar equipamento."],
+      5: ["Revise metas e limites de alerta a cada semestre, para que continuem significando alguma coisa.",
+          "Compare a projeção de demanda com o realizado e ajuste o modelo quando a diferença crescer.",
+          "Atualize o custo real por ensaio sempre que mudar o preço de reagente, a equipe ou o parque de equipamentos."]
+    },
+    D5: {
+      1: ["Pergunte à equipe, sem julgamento, quem já usa IA e para quê; o primeiro objetivo é saber o que já acontece.",
+          "Combine desde já uma regra mínima: nada que identifique cliente, amostra ou resultado entra em ferramenta de IA.",
+          "Escolha uma tarefa de baixo risco, como revisar a redação de um POP sem dado confidencial, e teste a assistência com uma pessoa responsável."],
+      2: ["Escreva em uma página o que pode e o que não pode entrar em uma ferramenta de IA e apresente o texto à equipe.",
+          "Estabeleça que nada produzido com apoio de IA vai para o cliente sem a revisão de uma segunda pessoa.",
+          "Defina quem é a referência no uso de IA no laboratório e reserve tempo para essa pessoa consolidar o que funciona."],
+      3: ["Transforme a orientação em política escrita, com regras de anonimização, validação e registro, e colha a assinatura de toda a equipe.",
+          "Classifique as tarefas assistidas por criticidade e defina, para cada classe, quem revisa e como.",
+          "Treine uma segunda pessoa para criar e ajustar fluxos assistidos, para que o conhecimento não fique concentrado em uma só."],
+      4: ["Passe a registrar o uso de IA nas tarefas críticas: o que foi feito, com qual ferramenta e quem validou.",
+          "Programe a revisão periódica da política, incluindo uma verificação do registro de uso na auditoria interna.",
+          "Documente um padrão comum para os fluxos assistidos e estenda o treinamento ao restante da equipe."],
+      5: ["Revise a política de IA a cada mudança relevante de ferramenta ou de escopo, e no mínimo uma vez por ano.",
+          "Audite por amostragem o registro de uso e de validação, como faria com qualquer registro técnico.",
+          "Inclua o padrão de fluxos assistidos no treinamento de todo analista que entrar na equipe."]
+    }
+  };
+
+  var PRIORIDADE = ["D2", "D3", "D1", "D5", "D4"];
+  var CHAVE = "diag-maturidade-v1";
+  var MAILERLITE_PLACEHOLDER = "ACTION_MAILERLITE_DIAGNOSTICO";
+
+  /* ---------- Estado ---------- */
+  var respostas = {}; // "1.1" -> 1..5
+  var etapa = 0;
+
+  function salvar(tela) {
+    try { localStorage.setItem(CHAVE, JSON.stringify({ r: respostas, e: etapa, t: tela })); } catch (e) {}
+  }
+  function carregar() {
+    try { var s = localStorage.getItem(CHAVE); return s ? JSON.parse(s) : null; } catch (e) { return null; }
+  }
+  function limpar() { try { localStorage.removeItem(CHAVE); } catch (e) {} }
+
+  /* ---------- Cálculo (seção 5) ---------- */
+  function calcular(r) {
+    var niveis = PERGUNTAS.map(function (qs) {
+      var soma = qs.reduce(function (s, q) { return s + r[q.id]; }, 0);
+      return Math.floor(soma / qs.length);
+    });
+    var nivel = Math.min.apply(null, niveis);
+    var potencial = Math.floor(niveis.reduce(function (s, n) { return s + n; }, 0) / niveis.length);
+    var gargalos = PRIORIDADE.filter(function (id) { return niveis[+id.slice(1) - 1] === nivel; });
+    var alerta = r["5.1"] === 2 && r["5.2"] <= 2;
+    return { niveis: niveis, nivel: nivel, potencial: potencial, gargalos: gargalos, principal: gargalos[0], alerta: alerta };
+  }
+
+  /* ---------- Navegação ---------- */
+  var telas = ["inicio", "perguntas", "resultado", "email"];
+  function mostrar(nome, foco) {
+    telas.forEach(function (t) { document.getElementById("tela-" + t).hidden = (t !== nome); });
+    document.getElementById("topo").classList.toggle("compacto", nome !== "inicio");
+    window.scrollTo(0, 0);
+    if (foco) { var el = document.getElementById(foco); if (el) el.focus({ preventScroll: true }); }
+  }
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  /* ---------- Perguntas ---------- */
+  function renderEtapa() {
+    var d = DIM[etapa];
+    document.getElementById("t-dim").textContent = d.id + " · " + d.nome;
+    document.getElementById("dim-desc").textContent = d.desc;
+    document.getElementById("prog-etapa").textContent = "Etapa " + (etapa + 1) + " de 5";
+    var html = PERGUNTAS[etapa].map(function (q) {
+      var nome = "q" + q.id.replace(".", "_");
+      var alts = q.a.map(function (txt, i) {
+        var v = i + 1, idr = nome + "_" + v;
+        return '<label class="alt" for="' + idr + '"><input type="radio" id="' + idr + '" name="' + nome + '" value="' + v + '" data-q="' + q.id + '"' +
+          (respostas[q.id] === v ? " checked" : "") + '><span>' + esc(txt) + "</span></label>";
+      }).join("");
+      return '<fieldset class="pergunta"><legend><span class="num">' + q.id + "</span> " + esc(q.t) + "</legend>" + alts + "</fieldset>";
+    }).join("");
+    document.getElementById("perguntas").innerHTML = html;
+    document.getElementById("btn-voltar").textContent = etapa === 0 ? "Voltar ao início" : "Voltar";
+    document.getElementById("btn-avancar").textContent = etapa === 4 ? "Ver resultado" : "Avançar";
+    atualizarEtapa();
+  }
+
+  function atualizarEtapa() {
+    var total = Object.keys(respostas).length;
+    var faltam = PERGUNTAS[etapa].filter(function (q) { return !respostas[q.id]; }).length;
+    var btn = document.getElementById("btn-avancar");
+    btn.disabled = faltam > 0;
+    document.getElementById("falta").textContent = faltam > 0
+      ? (faltam === 1 ? "Falta 1 pergunta nesta etapa." : "Faltam " + faltam + " perguntas nesta etapa.")
+      : "";
+    document.getElementById("prog-resp").textContent = total + " de 20 respondidas";
+    var pb = document.getElementById("prog-barra");
+    pb.setAttribute("aria-valuenow", total);
+    pb.firstElementChild.style.width = (total / 20 * 100) + "%";
+  }
+
+  document.getElementById("perguntas").addEventListener("change", function (e) {
+    var t = e.target;
+    if (t && t.dataset && t.dataset.q) {
+      respostas[t.dataset.q] = +t.value;
+      atualizarEtapa();
+      salvar("perguntas");
+    }
+  });
+
+  document.getElementById("form-etapa").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (document.getElementById("btn-avancar").disabled) return;
+    if (etapa < 4) { etapa++; renderEtapa(); salvar("perguntas"); mostrar("perguntas", "t-dim"); }
+    else { renderResultado(); salvar("resultado"); mostrar("resultado", "t-resultado"); }
+  });
+
+  document.getElementById("btn-voltar").addEventListener("click", function () {
+    if (etapa === 0) { mostrar("inicio", "t-inicio"); return; }
+    etapa--; renderEtapa(); salvar("perguntas"); mostrar("perguntas", "t-dim");
+  });
+
+  /* ---------- Resultado (seção 6, sem benchmark) ---------- */
+  function nomeDim(id) { var d = DIM[+id.slice(1) - 1]; return id + " · " + d.nome; }
+
+  function renderResultado() {
+    var R = calcular(respostas);
+    var N = NIVEIS[R.nivel], P = NIVEIS[R.potencial];
+    var g = R.principal, gDim = DIM[+g.slice(1) - 1];
+    var h = "";
+
+    // 1. Nível
+    h += '<div class="bloco destaque"><div class="rotulo">Seu nível</div>' +
+      '<p class="nivel-grande">N' + R.nivel + " · " + esc(N.nome) + "</p>" +
+      "<blockquote>“" + esc(N.frase) + "”</blockquote>" +
+      '<p style="margin:14px 0 0;color:var(--claro);font-size:.95rem">O nível do laboratório é o da dimensão mais fraca. Uso o mínimo, e não a média, porque maturidade é limitada pelo elo que segura o conjunto.</p></div>';
+
+    // 2. Potencial
+    var leitura;
+    if (R.nivel === 5) {
+      leitura = "Seu laboratório está no N5 em todas as dimensões, que considero o teto economicamente racional para um laboratório de 3 a 8 analistas. A partir daqui, o trabalho é sustentar o que já foi construído.";
+    } else if (R.potencial > R.nivel) {
+      var qtd = R.gargalos.length === 1 ? "uma dimensão" : (R.gargalos.length === 2 ? "duas dimensões" : R.gargalos.length + " dimensões");
+      leitura = "Seu laboratório está no N" + R.nivel + ", mas o seu potencial já é N" + R.potencial + ": falta corrigir " + qtd + " para o laboratório subir. " +
+        "Você não precisa avançar tudo junto, e dá para começar pelo gargalo sem esperar aprovação de orçamento.";
+    } else {
+      leitura = "Seu potencial coincide com o seu nível. Isso quer dizer que o perfil é equilibrado: as dimensões estão próximas umas das outras, e o laboratório sobe quando o conjunto avança. " +
+        "Por isso sugiro começar pelo gargalo indicado abaixo, que é a dimensão de menor atrito para o próximo passo.";
+    }
+    h += '<div class="bloco"><div class="rotulo">Seu potencial</div><p class="nivel-medio">N' + R.potencial + " · " + esc(P.nome) + "</p><p style=\"margin:0\">" + esc(leitura) + "</p></div>";
+
+    // 3. Perfil
+    var itens = DIM.map(function (d, i) {
+      var n = R.niveis[i], eg = R.gargalos.indexOf(d.id) >= 0;
+      return '<li class="' + (eg ? "gargalo" : "") + '"><div class="nome"><span>' + d.id + " · " + esc(d.nome) + (eg ? " (gargalo)" : "") + "</span><b>N" + n + "</b></div>" +
+        '<div class="trilho" role="img" aria-label="' + esc(d.nome) + ": nível " + n + " de 5" + (eg ? ", gargalo" : "") + '"><span class="valor" style="width:' + (n * 20) + '%"></span><span class="marcas"><i></i><i></i><i></i><i></i><i></i></span></div></li>';
+    }).join("");
+    h += '<div class="bloco"><div class="rotulo">Perfil por dimensão</div><h2 style="font-size:1.2rem">Um laboratório não tem um nível, tem um perfil</h2>' +
+      '<ul class="perfil">' + itens + '</ul><div class="escala" aria-hidden="true"><span>N1</span><span>N2</span><span>N3</span><span>N4</span><span>N5</span></div></div>';
+
+    // 4. Gargalo
+    var empate = "";
+    if (R.nivel === 5) {
+      empate = "<p>Não há gargalo propriamente dito: todas as dimensões estão no N5. Destaco a " + esc(nomeDim(g)) + " apenas como ponto de partida para a manutenção.</p>";
+    } else if (R.gargalos.length === 5) {
+      empate = "<p>As cinco dimensões estão no mesmo nível. Quando isso acontece, começo pela " + esc(nomeDim(g)) + ", porque a ordem que recomendo (D2, D3, D1, D5, D4) vai do menor atrito e maior retorno para o maior esforço.</p>";
+    } else if (R.gargalos.length > 1) {
+      empate = "<p>Há um empate: " + R.gargalos.map(nomeDim).map(esc).join(", ") + " estão no mesmo nível. " +
+        "Quando isso acontece, começo pela " + esc(nomeDim(g)) + ", porque a ordem que recomendo (D2, D3, D1, D5, D4) vai do menor atrito e maior retorno para o maior esforço.</p>";
+    }
+    var destrava = R.nivel === 5 ? NIVEIS[5].destrava
+      : "Para sair do N" + R.nivel + " nesta dimensão: " + DESTRAVA[g][R.nivel].charAt(0).toLowerCase() + DESTRAVA[g][R.nivel].slice(1);
+    h += '<div class="bloco gargalo-bloco"><div class="rotulo">' + (R.nivel === 5 ? "Ponto de atenção" : "Seu gargalo") + '</div><p class="nivel-medio" style="color:var(--ambar-texto)">' + esc(nomeDim(g)) + "</p>" +
+      '<p class="muted">' + esc(gDim.desc) + "</p>" + empate +
+      "<h3>Por que trava o conjunto</h3><p>" + esc(gDim.trava) + "</p>" +
+      "<h3>O que destrava</h3><p style=\"margin:0\">" + esc(destrava) + "</p></div>";
+
+    // 5. Ações
+    var acoes = ACOES[g][R.nivel];
+    h += '<div class="bloco"><div class="rotulo">Para os próximos 90 dias</div><h2 style="font-size:1.2rem">Suas 3 ações de maior retorno para 90 dias</h2>' +
+      '<p class="muted" style="margin:0">Escolhi estas ações pelo seu gargalo, ' + esc(nomeDim(g)) + ", e pelo nível em que ele está hoje." + (R.nivel <= 3 ? " A ideia é padronizar antes de comprar qualquer coisa: sistema não cria padrão, ele automatiza o que encontrar." : "") + "</p>" +
+      '<ol class="acoes">' + acoes.map(function (a) { return "<li>" + esc(a) + "</li>"; }).join("") + "</ol></div>";
+
+    // 6. Alerta de governança
+    if (R.alerta) {
+      h += '<div class="bloco alerta" role="note"><div class="rotulo">Alerta de governança</div><h2 style="font-size:1.2rem">Uso de IA sem política</h2>' +
+        "<p>Pelas suas respostas, a equipe já usa IA por conta própria e ainda não existe uma regra escrita sobre que dados podem entrar nessas ferramentas. Em laboratório sob a ISO/IEC 17025, confidencialidade e controle de dados são requisitos auditados, e este é o risco mais concreto do seu resultado.</p>" +
+        '<p style="margin:0">Escrevi um guia gratuito sobre o que pode e o que não pode, com uma política de uma página pronta para assinar com a equipe: <a href="/guia-ia/">IA em laboratório acreditado</a>.</p></div>';
+    }
+
+    document.getElementById("resultado").innerHTML = h;
+    preencherOcultos(R);
+  }
+
+  function preencherOcultos(R) {
+    R = R || calcular(respostas);
+    for (var i = 0; i < 5; i++) document.getElementById("h-d" + (i + 1)).value = R.niveis[i];
+    document.getElementById("h-nivel").value = R.nivel;
+    document.getElementById("h-potencial").value = R.potencial;
+    document.getElementById("h-gargalo").value = R.gargalos.join(",");
+    document.getElementById("h-alerta").value = R.alerta ? "sim" : "não";
+    var seq = [], k = 1;
+    PERGUNTAS.forEach(function (qs) { qs.forEach(function (q) { seq.push((k++) + ":" + respostas[q.id]); }); });
+    document.getElementById("h-respostas").value = seq.join(",");
+  }
+
+  /* ---------- Botões ---------- */
+  document.getElementById("btn-comecar").addEventListener("click", function () {
+    respostas = {}; etapa = 0; limpar(); renderEtapa(); mostrar("perguntas", "t-dim");
+  });
+  document.getElementById("btn-retomar").addEventListener("click", function () {
+    if (Object.keys(respostas).length === 20) { renderResultado(); mostrar("resultado", "t-resultado"); }
+    else { renderEtapa(); mostrar("perguntas", "t-dim"); }
+  });
+  document.getElementById("btn-refazer").addEventListener("click", function () {
+    respostas = {}; etapa = 0; limpar(); renderEtapa(); mostrar("perguntas", "t-dim");
+  });
+  document.getElementById("btn-email").addEventListener("click", function () {
+    preencherOcultos(); salvar("email"); mostrar("email", "t-email");
+  });
+  document.getElementById("btn-voltar-resultado").addEventListener("click", function () {
+    salvar("resultado"); mostrar("resultado", "t-resultado");
+  });
+
+  document.getElementById("form-email").addEventListener("submit", function (e) {
+    var f = e.currentTarget, aviso = document.getElementById("aviso-email");
+    aviso.className = "aviso";
+    if (!f.checkValidity()) {
+      e.preventDefault();
+      f.reportValidity();
+      return;
+    }
+    if (Object.keys(respostas).length !== 20) {
+      e.preventDefault();
+      aviso.className = "aviso erro";
+      aviso.textContent = "Não encontrei as 20 respostas. Refaça o diagnóstico antes de pedir o envio.";
+      return;
+    }
+    preencherOcultos();
+    if (f.getAttribute("action") === MAILERLITE_PLACEHOLDER) {
+      e.preventDefault();
+      aviso.className = "aviso info";
+      aviso.textContent = "Versão de teste: o envio por e-mail será ativado em breve.";
+      return;
+    }
+    aviso.className = "aviso ok";
+    aviso.textContent = "Pronto. Confirme seu e-mail na mensagem que vai chegar, e o resultado vai logo em seguida.";
+  });
+
+  /* ---------- Retomada ---------- */
+  var salvo = carregar();
+  if (salvo && salvo.r && typeof salvo.r === "object") {
+    var validas = {};
+    PERGUNTAS.forEach(function (qs) { qs.forEach(function (q) {
+      var v = +salvo.r[q.id]; if (v >= 1 && v <= 5) validas[q.id] = v;
+    }); });
+    if (Object.keys(validas).length > 0) {
+      respostas = validas;
+      etapa = Math.min(Math.max(+salvo.e || 0, 0), 4);
+      document.getElementById("retomar").hidden = false;
+    }
+  }
+})();
+</script>
+</body>
+</html>
