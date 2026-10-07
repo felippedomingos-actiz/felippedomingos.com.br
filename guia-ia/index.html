@@ -34,7 +34,7 @@
   .form-sec { background: var(--claro); }
   .form-box { background:#fff; border-radius:10px; padding:28px; max-width:560px; box-shadow: 0 6px 24px rgba(15,76,92,.12); }
   label { display:block; font-weight:700; font-size:.92rem; margin: 14px 0 6px; }
-  input[type=text], input[type=email], select { width:100%; padding:11px 12px; border:1px solid var(--linha); border-radius:6px; font: inherit; }
+  input[type=text], input[type=email], select { width:100%;background:#fff; padding:11px 12px; border:1px solid var(--linha); border-radius:6px; font: inherit; }
   .consent { display:flex; gap:10px; align-items:flex-start; margin-top:18px; font-size:.9rem; color:var(--cinza); }
   .consent input { margin-top:4px; }
   button { margin-top:20px; background:var(--ambar); color:#fff; border:0; border-radius:6px; padding:13px 22px; font: 700 1rem Lato, sans-serif; cursor:pointer; }
@@ -90,21 +90,22 @@
       <h2 style="margin-bottom:6px">Receba o guia por e-mail</h2>
       <p style="margin:0;color:var(--cinza)">Você confirma o e-mail e o guia chega logo em seguida.</p>
       <!-- MAILERLITE: substituir ACTION_MAILERLITE pela URL do formulário incorporado (Forms > Embedded > HTML). Os nomes dos campos seguem o padrão do MailerLite. -->
-      <form id="f" action="ACTION_MAILERLITE" method="post" target="_blank">
+      <form id="f" action="https://assets.mailerlite.com/jsonp/2689884/forms/200623770123109628/subscribe" method="post">
         <label for="nome">Nome</label>
         <input id="nome" name="fields[name]" type="text" autocomplete="given-name" required>
         <label for="email">E-mail</label>
         <input id="email" name="fields[email]" type="email" autocomplete="email" required>
         <label for="analistas">Quantos analistas tem o seu laboratório?</label>
-        <select id="analistas" name="fields[analistas]" required>
+        <select id="analistas" name="fields[numero_de_analistas]" required>
           <option value="">Selecione</option>
-          <option>1 a 2</option><option>3 a 8</option><option>9 ou mais</option><option>Não trabalho em laboratório</option>
+          <option>1 a 2</option><option>3 a 8</option><option value="9+">9 ou mais</option><option>Não trabalho em laboratório</option>
         </select>
         <div class="consent">
-          <input id="lgpd" name="gdpr[]" type="checkbox" value="consentimento" required>
+          <input id="lgpd" name="fields[consentimentolgpd][]" type="checkbox" value="Autorizo Felippe Domingos a usar meu nome e e-mail para enviar o guia e até três e-mails sobre o tema. Posso cancelar a qualquer momento pelo link em cada mensagem. Veja a política de privacidade." required>
           <label for="lgpd" style="font-weight:400;margin:0">Autorizo Felippe Domingos a usar meu nome e e-mail para enviar o guia e até três e-mails sobre o tema. Posso cancelar a qualquer momento pelo link em cada mensagem. Veja a <a href="/privacidade/">política de privacidade</a>.</label>
         </div>
         <input type="hidden" name="ml-submit" value="1">
+        <input type="hidden" name="anticsrf" value="true">
         <button type="submit">Quero receber o guia</button>
         <div class="ok" id="ok">Pronto. Confirme seu e-mail na mensagem que acabou de chegar, e o guia vai logo em seguida.</div>
       </form>
@@ -122,5 +123,15 @@
 <footer>
   <div class="wrap">Felippe Domingos · <a href="/privacidade/">Política de privacidade</a> · contato@felippedomingos.com.br</div>
 </footer>
+<script>
+document.getElementById('f').addEventListener('submit',function(e){
+  e.preventDefault();
+  var f=this,b=f.querySelector('button');b.disabled=true;b.textContent='Enviando...';
+  fetch(f.action,{method:'POST',mode:'no-cors',body:new FormData(f)}).then(function(){
+    Array.prototype.forEach.call(f.children,function(c){if(c.id!=='ok')c.style.display='none'});
+    document.getElementById('ok').style.display='block';
+  }).catch(function(){b.disabled=false;b.textContent='Quero receber o guia';alert('Não foi possível enviar. Tente novamente em instantes.');});
+});
+</script>
 </body>
 </html>

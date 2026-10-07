@@ -196,18 +196,18 @@
         <!-- MAILERLITE: substituir ACTION_MAILERLITE_DIAGNOSTICO pela URL do formulário incorporado (Forms > Embedded > HTML).
              Os campos personalizados (analistas, d1..d5, nivel, potencial, gargalo, alerta_ia, respostas) precisam existir no MailerLite com esses mesmos nomes.
              Enquanto o action for o placeholder, o JS mostra um aviso de versão de teste e não envia nada. -->
-        <form id="form-email" action="ACTION_MAILERLITE_DIAGNOSTICO" method="post" target="_blank">
+        <form id="form-email" action="https://assets.mailerlite.com/jsonp/2689884/forms/200625081095816334/subscribe" method="post">
           <label class="campo" for="nome">Nome</label>
           <input id="nome" name="fields[name]" type="text" autocomplete="given-name" required>
           <label class="campo" for="email">E-mail</label>
           <input id="email" name="fields[email]" type="email" autocomplete="email" required>
           <label class="campo" for="analistas">Quantos analistas tem o seu laboratório?</label>
-          <select id="analistas" name="fields[analistas]" required>
+          <select id="analistas" name="fields[numero_de_analistas]" required>
             <option value="">Selecione</option>
-            <option>1 a 2</option><option>3 a 8</option><option>9 ou mais</option><option>Não trabalho em laboratório</option>
+            <option>1 a 2</option><option>3 a 8</option><option value="9+">9 ou mais</option><option>Não trabalho em laboratório</option>
           </select>
           <div class="consent">
-            <input id="lgpd" name="gdpr[]" type="checkbox" value="consentimento" required>
+            <input id="lgpd" name="fields[consentimentolgpd][]" type="checkbox" value="Autorizo Felippe Domingos a guardar meu nome, e-mail e minhas respostas para enviar o resultado e compor estatísticas agregadas e anônimas. Posso pedir a exclusão a qualquer momento. Veja a política de privacidade." required>
             <label for="lgpd">Autorizo Felippe Domingos a guardar meu nome, e-mail e minhas respostas para enviar o resultado e compor estatísticas agregadas e anônimas. Posso pedir a exclusão a qualquer momento. Veja a <a href="/privacidade/">política de privacidade</a>.</label>
           </div>
           <input type="hidden" name="fields[d1]" id="h-d1">
@@ -221,6 +221,7 @@
           <input type="hidden" name="fields[alerta_ia]" id="h-alerta">
           <input type="hidden" name="fields[respostas]" id="h-respostas">
           <input type="hidden" name="ml-submit" value="1">
+          <input type="hidden" name="anticsrf" value="true">
           <div class="acoes-nav" style="justify-content:flex-start;margin-top:20px">
             <button type="submit" class="btn">Enviar</button>
             <button type="button" class="btn btn-sec" id="btn-voltar-resultado">Voltar ao resultado</button>
@@ -525,7 +526,7 @@
 
   var PRIORIDADE = ["D2", "D3", "D1", "D5", "D4"];
   var CHAVE = "diag-maturidade-v1";
-  var MAILERLITE_PLACEHOLDER = "ACTION_MAILERLITE_DIAGNOSTICO";
+  var MAILERLITE_PLACEHOLDER = "ACTION_MAILERLITE_DIAGNOSTICO"; // já substituído; mantido só para a checagem abaixo
 
   /* ---------- Estado ---------- */
   var respostas = {}; // "1.1" -> 1..5
@@ -742,8 +743,17 @@
       aviso.textContent = "Versão de teste: o envio por e-mail será ativado em breve.";
       return;
     }
-    aviso.className = "aviso ok";
-    aviso.textContent = "Pronto. Confirme seu e-mail na mensagem que vai chegar, e o resultado vai logo em seguida.";
+    e.preventDefault();
+    var btn = f.querySelector("button[type=submit]");
+    if (btn) btn.disabled = true;
+    fetch(f.action, { method: "POST", mode: "no-cors", body: new FormData(f) }).then(function () {
+      aviso.className = "aviso ok";
+      aviso.textContent = "Pronto. Confirme seu e-mail na mensagem que vai chegar, e o resultado vai logo em seguida.";
+    }).catch(function () {
+      if (btn) btn.disabled = false;
+      aviso.className = "aviso erro";
+      aviso.textContent = "Não foi possível enviar agora. Tente novamente em instantes.";
+    });
   });
 
   /* ---------- Retomada ---------- */
